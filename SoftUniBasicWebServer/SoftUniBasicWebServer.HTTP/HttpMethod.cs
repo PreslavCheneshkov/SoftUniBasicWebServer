@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace SoftUniBasicWebServer.HTTP
 {
-    public interface IHttpServer
+    public enum HttpMethod
     {
-        void AddRoute(string path, Func<HttpRequest, HttpResponse> actoin);
-
-        Task StartAsync(int port);
+        Get = 1,
+        Post = 2,
+        Put = 3,
+        Delete = 4,
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SoftUniBasicWebServer.HTTP
 {
-    public interface IHttpServer
+    public static class HttpConstants
     {
-        void AddRoute(string path, Func<HttpRequest, HttpResponse> actoin);
-
-        Task StartAsync(int port);
+        public const string NewLine = "\r\n";
+        public const int BufferSize = 4096;
     }
 }
