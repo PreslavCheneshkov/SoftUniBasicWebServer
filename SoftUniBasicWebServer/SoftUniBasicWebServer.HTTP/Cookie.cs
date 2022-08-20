@@ -8,6 +8,11 @@ namespace SoftUniBasicWebServer.HTTP
 {
     public class Cookie
     {
+        public Cookie(string name, string value)
+        {
+            this.Name = name;
+            this.Value = value;
+        }
         public Cookie(string cookieAsString)
         {
             var cookieParts = cookieAsString.Split(new char[] { '=' }, 2);
@@ -16,5 +21,9 @@ namespace SoftUniBasicWebServer.HTTP
         }
         public string Name { get; set; }
         public string Value { get; set; }
+        public override string ToString()
+        {
+            return $"{this.Name}={this.Value}";
+        }
     }
 }

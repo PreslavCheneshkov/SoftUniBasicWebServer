@@ -70,19 +70,25 @@ namespace SoftUniBasicWebServer.HTTP
                     var request = new HttpRequest(requestAsString);
                     Console.WriteLine($"{request.Method} {request.Path} => {request.Headers.Count} headers");
 
+                    HttpResponse response;
+                    if (this.routeTable.ContainsKey(request.Path))
+                    {
+                        var action = this.routeTable[request.Path];
+                        response = action(request);
+                    }
+                    else
+                    {
+                        // not found
+                        response = new HttpResponse("text/html", new byte[0], HttpStatusCode.NotFound);
+                    }
 
+                    response.Cookies.Add(new ResponseCookie("sid", Guid.NewGuid().ToString())
+                    { HttpOnly = true, MaxAge = 60 * 24 * 60 * 60 });
+                    response.Headers.Add(new Header("Server:", "SoftUniBasicWebServer 1.0"));
+                    var reponseHeaderBytes = Encoding.UTF8.GetBytes(response.ToString());
 
-                    //todo extract info as requestAsString
-                    var responseHtml = "<h1>Hello, Welcome!</h1>" + request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-                    var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-                    var responseHttp = "HTTP/1.1 200 OK" + HttpConstants.NewLine +
-                        "Server: SoftUniBasicWebServer 1.0" + HttpConstants.NewLine +
-                        "Content-Type: text/html" + HttpConstants.NewLine +
-                        "Content-Length" + responseBodyBytes.Length + HttpConstants.NewLine +
-                        HttpConstants.NewLine;
-                    var reponseHeaderBytes = Encoding.UTF8.GetBytes(responseHttp);
-                    await stream.WriteAsync(reponseHeaderBytes);
-                    await stream.WriteAsync(responseBodyBytes);
+                    await stream.WriteAsync(reponseHeaderBytes, 0 , reponseHeaderBytes.Length);
+                    await stream.WriteAsync(response.Body, 0, response.Body.Length);
                 }
             }
             catch (Exception ex)
