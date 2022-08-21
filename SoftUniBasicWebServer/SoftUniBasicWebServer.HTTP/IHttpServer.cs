@@ -8,8 +8,6 @@ namespace SoftUniBasicWebServer.HTTP
 {
     public interface IHttpServer
     {
-        void AddRoute(string path, Func<HttpRequest, HttpResponse> actoin);
-
         Task StartAsync(int port);
     }
 }
