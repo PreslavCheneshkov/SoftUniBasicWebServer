@@ -7,13 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ViewTests\IfElseFor.html" />
+    <None Remove="ViewTests\Foreach.Result.html" />
+    <None Remove="ViewTests\Foreach.Results.html" />
+    <None Remove="ViewTests\IfElseFor.Result.Html" />
+    <None Remove="ViewTests\ViewModel.html" />
+    <None Remove="ViewTests\ViewModel.Result.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="ViewTests\IfElseFor.html">
+    <Page Include="ViewTests\Foreach.Results.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Page>
+    <Content Include="ViewTests\Foreach.Result.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ViewTests\IfElseFor.Result.Html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ViewTests\ViewModel.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ViewTests\ViewModel.Result.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -38,22 +54,13 @@
     <None Update="ViewTests\CleanHtml.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="ViewTests\Cleanhtml.Result.html">
+    <None Update="ViewTests\CleanHtml.Result.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ViewTests\Foreach.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="ViewTests\Foreach.Results.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ViewTests\IfElseFor.Result.Html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ViewTests\ViewModel.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ViewTests\ViewModel.Result.html">
+    <None Update="ViewTests\IfElseFor.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -24,7 +24,7 @@ namespace SoftUniBasicWebServer.Tests
             IViewEngine viewEngine = new ViewEngine();
             var view = File.ReadAllText($"ViewTests/{fileName}.html");
             var result = viewEngine.GetHtml(view, viewModel);
-            var expectedResult = File.ReadAllText($"ViewTests{fileName}.Result.html");
+            var expectedResult = File.ReadAllText($"ViewTests/{fileName}.Result.html");
             Assert.Equal(expectedResult, result);
         }
         public class TestViewModel
