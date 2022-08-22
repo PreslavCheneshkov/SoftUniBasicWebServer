@@ -14,6 +14,8 @@ namespace SoftUniBasicWebServer
         public void Configure(List<Route> routeTable)
         {
             routeTable.Add(new Route("/", HttpMethod.Get, new HomeController().Index));
+            routeTable.Add(new Route("/home/about", HttpMethod.Get, new HomeController().About));
+
             routeTable.Add(new Route("/users/login", HttpMethod.Get, new UsersController().Login));
             routeTable.Add(new Route("/users/login", HttpMethod.Post, new UsersController().DoLogin));
             routeTable.Add(new Route("/users/register", HttpMethod.Get, new UsersController().Register));
