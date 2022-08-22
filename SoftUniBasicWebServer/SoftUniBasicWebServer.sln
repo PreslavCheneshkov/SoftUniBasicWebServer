@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftUniBasicWebServer.MVCFr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{DD53803E-97CF-424D-8E48-0B3E94F2F42D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftUniBasicWebServer.Tests", "SoftUniBasicWebServer.Tests\SoftUniBasicWebServer.Tests.csproj", "{E53F9A97-BD52-46F3-85D7-0104E6F364CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{C663C95A-FECA-4FBC-824B-96FE28B25932}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C663C95A-FECA-4FBC-824B-96FE28B25932}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C663C95A-FECA-4FBC-824B-96FE28B25932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53F9A97-BD52-46F3-85D7-0104E6F364CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53F9A97-BD52-46F3-85D7-0104E6F364CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53F9A97-BD52-46F3-85D7-0104E6F364CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53F9A97-BD52-46F3-85D7-0104E6F364CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
