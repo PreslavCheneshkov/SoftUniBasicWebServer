@@ -1,4 +1,5 @@
 ﻿using SoftUniBasicWebServer.HTTP;
+using SoftUniBasicWebServer.MVCFramework.ViewEngine;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,12 @@ namespace SoftUniBasicWebServer.MVCFramework
 {
     public abstract class Controller
     {
-        public HttpResponse View([CallerMemberName]string viewPath = null)
+        private SUSViewEngine viewEngine;
+        public Controller()
+        {
+            this.viewEngine = new SUSViewEngine();
+        }
+        public HttpResponse View(object viewModel = null, [CallerMemberName]string viewPath = null)
         {
             var layout = System.IO.File.ReadAllText("Views/Shared/_Layout.cshtml");
 
@@ -19,6 +25,8 @@ namespace SoftUniBasicWebServer.MVCFramework
                 "Views/" + 
                 this.GetType().Name.Replace("Controller", string.Empty) + "/" 
                 + viewPath + ".cshtml");
+
+            viewContent = this.viewEngine.GetHtml(viewContent, viewModel);
 
             var responseHtml = layout.Replace("@RenderBody()", viewContent);
 

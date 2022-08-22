@@ -1,7 +1,7 @@
-using SoftUniBasicWebServer.MVCFramework.ViewEngine;
 using System;
 using System.IO;
 using Xunit;
+using SoftUniBasicWebServer.MVCFramework.ViewEngine;
 
 namespace SoftUniBasicWebServer.Tests
 {
@@ -21,7 +21,7 @@ namespace SoftUniBasicWebServer.Tests
                 Price = 12345.67M,
             };
 
-            IViewEngine viewEngine = new ViewEngine();
+            IViewEngine viewEngine = new SUSViewEngine();
             var view = File.ReadAllText($"ViewTests/{fileName}.html");
             var result = viewEngine.GetHtml(view, viewModel);
             var expectedResult = File.ReadAllText($"ViewTests/{fileName}.Result.html");

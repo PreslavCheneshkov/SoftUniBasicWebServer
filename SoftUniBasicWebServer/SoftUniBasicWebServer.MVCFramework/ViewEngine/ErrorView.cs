@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftUniBasicWebServer.MVCFramework.ViewEngine
 {
@@ -16,6 +15,7 @@ namespace SoftUniBasicWebServer.MVCFramework.ViewEngine
             this.errors = errors;
             this.csharpCode = csharpCode;
         }
+
         public string ExecuteTemplate(object viewModel)
         {
             var html = new StringBuilder();
@@ -24,6 +24,7 @@ namespace SoftUniBasicWebServer.MVCFramework.ViewEngine
             {
                 html.AppendLine($"<li>{error}</li>");
             }
+
             html.AppendLine($"</ul><pre>{csharpCode}</pre>");
             return html.ToString();
         }
