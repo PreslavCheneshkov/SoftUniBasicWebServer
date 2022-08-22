@@ -19,5 +19,14 @@ namespace SoftUniBasicWebServer.Controllers
         {
             return this.View();
         }
+
+        internal HttpResponse DoLogin(HttpRequest arg)
+        {
+            //read data
+            //check user
+            //log user
+            //redirect home
+            return this.Redirect("/");
+        }
     }
 }
