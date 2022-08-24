@@ -20,6 +20,7 @@ namespace SoftUniBasicWebServer.Controllers
             return this.View();
         }
 
+        [HttpPost]
         internal HttpResponse DoLogin(HttpRequest arg)
         {
             //read data
