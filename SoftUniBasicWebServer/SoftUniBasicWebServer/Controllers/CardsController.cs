@@ -1,5 +1,6 @@
 ﻿using SoftUniBasicWebServer.HTTP;
 using SoftUniBasicWebServer.MVCFramework;
+using SoftUniBasicWebServer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,26 @@ namespace SoftUniBasicWebServer.Controllers
 {
     public class CardsController : Controller
     {
-        public HttpResponse Add(HttpRequest request)
+        public HttpResponse Add()
         {
             return this.View();
         }
-        public HttpResponse All(HttpRequest request)
+        [HttpPost("/Cards/Add")]
+        public HttpResponse DoAdd()
+        {
+            var request = this.Request;
+            var viewModel = new DoAddViewModel
+            {
+                Attack = int.Parse(this.Request.FormData["attack"]),
+                Health = int.Parse(this.Request.FormData["health"]),
+            };
+            return this.View(viewModel);
+        }
+        public HttpResponse All()
         {
             return this.View();
         }
-        public HttpResponse Collection(HttpRequest request)
+        public HttpResponse Collection()
         {
             return this.View();
         }

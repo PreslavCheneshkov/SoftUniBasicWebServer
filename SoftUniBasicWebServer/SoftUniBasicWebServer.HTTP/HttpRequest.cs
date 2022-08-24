@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,11 +51,24 @@ namespace SoftUniBasicWebServer.HTTP
             }
 
             this.Body = bodyBuilder.ToString();
+            var parameters = this.Body.Split('&', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var param in parameters)
+            {
+                var paramParts = param.Split('=');
+                var name = paramParts[0];
+                var value = WebUtility.UrlDecode(paramParts[1]);
+                if (!this.FormData.ContainsKey(name))
+                {
+                    this.FormData.Add(name, value);
+                }
+                this.FormData[name] = value;
+            }
         }
         public string Path { get; set; }
         public HttpMethod Method { get; set; }
         public ICollection<Header> Headers { get; set; } = new List<Header>();
         public ICollection<Cookie> Cookies { get; set; } = new List<Cookie>();
+        public IDictionary<string, string> FormData { get; set; } = new Dictionary<string, string>();
 
         public string Body { get; set; }
     }
