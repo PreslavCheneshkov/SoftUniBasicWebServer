@@ -37,7 +37,18 @@ namespace SoftUniBasicWebServer.Controllers
         }
         public HttpResponse All()
         {
-            return this.View();
+            var db = new ApplicationDbContext();
+            var cardsViewModel = db.Cards.Select(x => new CardViewModel
+            {
+                Name = x.Name,
+                ImageUrl = x.ImageUrl,
+                Type = x.KeyWord,
+                Attack = x.Attack,
+                Description = x.Description,
+                Health = x.Health,
+            }).ToList();
+
+            return this.View(new AllCardsViewModel { Cards = cardsViewModel});
         }
         public HttpResponse Collection()
         {
