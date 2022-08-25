@@ -1,4 +1,5 @@
-﻿using SoftUniBasicWebServer.HTTP;
+﻿using SoftUniBasicWebServer.Data;
+using SoftUniBasicWebServer.HTTP;
 using SoftUniBasicWebServer.MVCFramework;
 using SoftUniBasicWebServer.ViewModels;
 using System;
@@ -18,13 +19,21 @@ namespace SoftUniBasicWebServer.Controllers
         [HttpPost("/Cards/Add")]
         public HttpResponse DoAdd()
         {
-            var request = this.Request;
-            var viewModel = new DoAddViewModel
+            var dbContext = new ApplicationDbContext();
+            dbContext.Cards.Add(new Card
             {
                 Attack = int.Parse(this.Request.FormData["attack"]),
                 Health = int.Parse(this.Request.FormData["health"]),
-            };
-            return this.View(viewModel);
+                Description = this.Request.FormData["description"],
+                Name = this.Request.FormData["name"],
+                ImageUrl = this.Request.FormData["image"],
+                KeyWord = this.Request.FormData["keyword"],
+
+            });
+
+            dbContext.SaveChanges();
+
+            return this.Redirect("/");
         }
         public HttpResponse All()
         {
