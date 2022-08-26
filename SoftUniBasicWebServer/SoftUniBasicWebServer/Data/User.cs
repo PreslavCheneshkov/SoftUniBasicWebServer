@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SoftUniBasicWebServer.Data
 {
-    public class User : UserIdentity
+    public class User : IdentityUser<string>
     {
         public User()
         {

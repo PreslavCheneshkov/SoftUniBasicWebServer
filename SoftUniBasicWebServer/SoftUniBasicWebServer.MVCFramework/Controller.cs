@@ -12,13 +12,14 @@ namespace SoftUniBasicWebServer.MVCFramework
 {
     public abstract class Controller
     {
+        private const string UserIdSessionName = "UserId";
         private SUSViewEngine viewEngine;
         public Controller()
         {
             this.viewEngine = new SUSViewEngine();
         }
         public HttpRequest Request { get; set; }
-        public HttpResponse View(object viewModel = null, [CallerMemberName]string viewPath = null)
+        protected HttpResponse View(object viewModel = null, [CallerMemberName]string viewPath = null)
         {
             var layout = System.IO.File.ReadAllText("Views/Shared/_Layout.cshtml");
 
@@ -27,7 +28,7 @@ namespace SoftUniBasicWebServer.MVCFramework
                 this.GetType().Name.Replace("Controller", string.Empty) + "/" 
                 + viewPath + ".cshtml");
 
-            viewContent = this.viewEngine.GetHtml(viewContent, viewModel);
+            viewContent = this.viewEngine.GetHtml(viewContent, viewModel, this.GetUserId());
 
             var responseHtml = layout.Replace("@RenderBody()", viewContent);
 
@@ -36,17 +37,27 @@ namespace SoftUniBasicWebServer.MVCFramework
             var response = new HttpResponse("text/html", responseBodyBytes);
             return response;
         }
-        public HttpResponse File(string filePath, string contentType)
+        protected HttpResponse File(string filePath, string contentType)
         {
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             var response =  new HttpResponse(contentType, fileBytes);
             return response;
         }
-        public HttpResponse Redirect(string url)
+        protected HttpResponse Redirect(string url)
         {
             var response = new HttpResponse(HttpStatusCode.Found);
             response.Headers.Add(new Header("Location", url));
             return response;
         }
+        protected void SignIn(string userId)
+        {
+            this.Request.Session[UserIdSessionName] = userId;
+        }
+        protected void SignOut()
+        {
+            this.Request.Session[UserIdSessionName] = null;
+        }
+        protected bool IsUserSignedIn() => this.Request.Session.ContainsKey(UserIdSessionName);
+        protected string GetUserId() => this.IsUserSignedIn()?this.Request.Session[UserIdSessionName]:null;
     }
 }

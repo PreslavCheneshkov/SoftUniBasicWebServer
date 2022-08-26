@@ -14,7 +14,7 @@ namespace SoftUniBasicWebServer.MVCFramework.ViewEngine
     // RAZOR VIEW ENGINE
     public class SUSViewEngine : IViewEngine
     {
-        public string GetHtml(string templateCode, object viewModel)
+        public string GetHtml(string templateCode, object viewModel, string user)
         {
             string csharpCode = GenerateCSharpFromTemplate(templateCode, viewModel);
             IView executableObject = GenerateExecutableCоde(csharpCode, viewModel);
@@ -51,9 +51,9 @@ namespace ViewNamespace
 {
     public class ViewClass : IView
     {
-        public string ExecuteTemplate(object viewModel)
+        public string ExecuteTemplate(object viewModel, string user)
         {
-            //var User = user;
+            var User = user;
             var Model = viewModel as " + typeOfModel + @";
             var html = new StringBuilder();
 
